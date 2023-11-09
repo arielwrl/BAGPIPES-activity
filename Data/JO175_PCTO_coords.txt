@@ -1,0 +1,11 @@
+Pixel bulge: [1500.0, 2142.0] 
+ size= 70.0
+Bulge: <SkyCoord (ICRS): (ra, dec) in deg
+    (312.8233852, -52.82264724)> 
+ size= 2.8000000000000003 arcsec
+--------------------------------
+Pixel disk: [1421.0, 2221.0] 
+ size= 70.0
+Disk: <SkyCoord (ICRS): (ra, dec) in deg
+    (312.82483822, -52.82176973)> 
+ size= 2.8000000000000003 arcsec
