@@ -18,7 +18,7 @@ def make_bagpipes_model(age, tau, mass, Av, z, metallicity=2, delayed=False, fil
     exp["age"] = age
     exp["tau"] = tau
     exp["massformed"] = mass
-    exp["metallicity"] = 2
+    exp["metallicity"] = metallicity
 
     dust = {}
     dust["type"] = "Calzetti"
