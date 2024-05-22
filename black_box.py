@@ -7,7 +7,7 @@ import seaborn as sns
 sns.set_style('ticks')
 
 
-def make_bagpipes_model(age, tau, mass, Av, z, filter_list=None):
+def make_bagpipes_model(age, tau, mass, Av, z, metallicity=2, delayed=False, filter_list=None):
     """
 
     Plots a BAGPIPES model for HST filters
@@ -23,17 +23,21 @@ def make_bagpipes_model(age, tau, mass, Av, z, filter_list=None):
     dust = {}
     dust["type"] = "Calzetti"
     dust["Av"] = Av
-    dust["eta"] = 2.
+    dust["eta"] = metallicity
 
     nebular = {}
     nebular["logU"] = -3.
 
     model_components = {}
     model_components["redshift"] = z
-    model_components["delayed"] = exp
     model_components["dust"] = dust
     model_components["t_bc"] = 0.02
-    # model_components["nebular"] = nebular
+    model_components["nebular"] = nebular
+
+    if delayed:
+        model_components["delayed"] = exp
+    else:
+        model_components["exponential"] = exp
 
     if filter_list is not None:
         model = pipes.model_galaxy(model_components, filt_list=filter_list,
