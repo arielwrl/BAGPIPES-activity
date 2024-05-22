@@ -1,6 +1,4 @@
-# PCTO BAGPIPES
-
-Materials for an outreach activity using BAGPIPES. Originally intended for Italian high school students.
+Materials for an activity using BAGPIPES to build intuition on galaxy properties.
 
 Includes data, a `blackbox.py` module with functions that should stay hidden from you and two jupyter notebooks intended to run on [google colab](https://colab.google).
 
