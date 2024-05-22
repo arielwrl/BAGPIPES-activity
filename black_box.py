@@ -69,13 +69,15 @@ def plot_filters(paths_to_filters, filter_names):
     plt.ylabel(r'$T_\lambda$', fontsize=20)
 
 
-def plot_model(age, tau, mass, Av=0, redshift=0, filters=None):
+def plot_model(age, tau, mass, Av=0, redshift=0, metallicity=2, delayed=False, filters=None):
     if filters is None:
         model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av,
-                                    z=redshift)
+                                    z=redshift, metallicity=metallicity, 
+                                    delayed=delayed)
     else:
         model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av,
-                                    z=redshift, filter_list=filters)
+                                    z=redshift, filter_list=filters, metallicity=metallicity, 
+                                    delayed=delayed)
 
     wave_limit = (model.wavelengths > 2000) & (model.wavelengths < 9000)
 
@@ -101,8 +103,8 @@ def plot_model(age, tau, mass, Av=0, redshift=0, filters=None):
     return model
 
 
-def plot_model_unphysical(age, tau, mass, Av=0, redshift=0):
-    model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av, z=0)
+def plot_model_unphysical(age, tau, mass, Av=0, redshift=0, metallicity=2, delayed=False):
+    model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av, z=0, metallicity=metallicity, delayed=delayed)
 
     wave_limit = (model.wavelengths > 2000) & (model.wavelengths < 9000)
 
@@ -123,8 +125,9 @@ def plot_model_unphysical(age, tau, mass, Av=0, redshift=0):
     return model
 
 
-def plot_sfh(age, tau, mass, redshift=0, Av=0):
-    model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av, z=redshift)
+def plot_sfh(age, tau, mass, redshift=0, Av=0, metallicity=2, delayed=False):
+    model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av, z=redshift, 
+                                metallicity=metallicity, delayed=delayed)
 
     plt.figure(figsize=(8, 7))
 
@@ -139,12 +142,14 @@ def plot_sfh(age, tau, mass, redshift=0, Av=0):
                              useMathText=True)
 
 
-def plot_sfh_advanced(age, tau, mass, redshift=0, Av=0, color='k', label=None, ax=None):
+def plot_sfh_advanced(age, tau, mass, redshift=0, Av=0, color='k', label=None, ax=None, 
+                      metallicity=2, delayed=False):
     
     if ax is None:
         ax = plt.gca()
 
-    model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av, z=redshift)
+    model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av, z=redshift,
+                                metallicity=metallicity, delayed=delayed)
 
     ax.plot(13.5 - model.sfh.ages / 1e9, model.sfh.sfh, color=color, label=label)
     ax.set_xlim(0, 13.5)
@@ -230,6 +235,7 @@ def plot_observation(region, filters,
 
 
 def plot_model_and_observation(region, age, tau, mass, Av, redshift, filters,
+                               metallicity=2, delayed=False,
                                data_dir='/content/drive/MyDrive/PCTO_BAGPIPES/Data/'):
     """
 
@@ -239,10 +245,11 @@ def plot_model_and_observation(region, age, tau, mass, Av, redshift, filters,
 
     if filters is None:
         model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av,
-                                    z=redshift)
+                                    z=redshift, metallicity=metallicity, delayed=delayed)
     else:
         model = make_bagpipes_model(age=age, tau=tau, mass=mass, Av=Av,
-                                    z=redshift, filter_list=filters)
+                                    z=redshift, filter_list=filters,
+                                    metallicity=metallicity, delayed=delayed)
 
     flux, error = read_hst_photometry(region, data_dir)
 
