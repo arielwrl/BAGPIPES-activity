@@ -207,7 +207,7 @@ def plot_observation(region, filters,
 
     """
 
-    flux, error = read_hst_photometry(region)
+    flux, error = read_hst_photometry(region, data_dir=data_dir)
 
     wavelengths = np.array([pivot_wavelength(filter) for filter in filters])
 
